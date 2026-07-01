@@ -1305,7 +1305,7 @@ async function testC19Vision(): Promise<TestResult> {
     if (typeof vis.encode !== 'function') throw new Error('Core.vision.encode is not a function');
     emit('  Core.vision: encode() + send() available');
 
-    const SMELLY_URL = 'https://media.base44.com/images/public/6a2e36c97be7cd0e458f7578/80d5e5386_generated_image.png';
+    const SMELLY_URL = 'https://raw.githubusercontent.com/santenova/ollama-spaceship/refs/heads/main/images/mission_patches.png';
     const smilieResp = await fetch(SMELLY_URL);
     const smilieBuf = await smilieResp.arrayBuffer();
     const bareB64 = typeof Buffer !== 'undefined'
@@ -1833,7 +1833,7 @@ async function testC25StreamResponseVision(): Promise<TestResult> {
     emit('  Endpoint reachable');
 
     // Use the same real image URL as C19/C21
-    const SMELLY_URL = 'https://media.base44.com/images/public/6a2e36c97be7cd0e458f7578/80d5e5386_generated_image.png';
+    const SMELLY_URL = 'https://media.base44.com/images/public/6901f73a3178f5670b5f2458/5d499bae0_generated_image.png';
     const imgResp = await fetch(SMELLY_URL);
     const imgBuf = await imgResp.arrayBuffer();
     const bareB64 = typeof Buffer !== 'undefined'
