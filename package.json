@@ -1,11 +1,11 @@
 {
-  "name": "ollama-spaceship",
+  "name": "Ollama-Spaceship",
   "version": "1.0.0",
   "description": "Complete reference for every module in `src/apis/`.   The entry points are **`client.ts`** (low-level singleton) and **`ClientLibrary.ts`** (high-level class wrapper).",
   "main": "postcss.config.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run docs; echo '<meta http-equiv=\"refresh\" content=\"0; url=./docs/index.html\" />' >index.html; vite build",
     "lint": "eslint .",
     "typecheck": "tsc -p ./tsconfig.json",
     "preview": "vite preview",
@@ -13,7 +13,7 @@
     "test:watch": "node --experimental-vm-modules node_modules/.bin/jest --watch",
     "test:fail": "node --experimental-vm-modules node_modules/.bin/jest --reporters=./jest-fail-reporter.cjs",
     "test:client": "npx tsx src/apis/client.test.ts",
-    "docs": "npx typedoc --entryPoints src --entryPointStrategy expand --out docs/api --tsconfig tsconfig.test.json --skipErrorChecking"
+    "docs": "cp  -r images dist/; npx typedoc --customCss ./images/style.css --entryPoints src --entryPointStrategy expand --out docs --tsconfig tsconfig.test.json --skipErrorChecking"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "@tsconfig/node20": "^20.1.9",
     "@types/node": "^26.0.1",
     "ts-node": "^10.9.2",
+    "typedoc": "^0.28.19",
     "typescript": "^6.0.3"
   },
   "dependencies": {

@@ -1,1 +1,0 @@
-{"version":3,"file":"endpoint-registry.d.ts","sourceRoot":"","sources":["endpoint-registry.ts"],"names":[],"mappings":"AAAA;;;GAGG;AAoDH,eAAO,MAAM,gBAAgB;IAC3B,uCAAuC;cAC7B,MAAM;IAIhB,mCAAmC;iBACtB,MAAM,EAAE;IAIrB,4CAA4C;qBAC3B,MAAM;IAIvB;;;OAGG;oBACa,OAAO,CAAC;QAAE,MAAM,EAAE,MAAM,EAAE,CAAC;QAAC,aAAa,EAAE,MAAM,CAAA;KAAE,CAAC;IAUpE,wCAAwC;;CAIzC,CAAC"}

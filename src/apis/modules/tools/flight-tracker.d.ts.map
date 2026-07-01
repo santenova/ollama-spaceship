@@ -1,1 +1,0 @@
-{"version":3,"file":"flight-tracker.d.ts","sourceRoot":"","sources":["flight-tracker.ts"],"names":[],"mappings":"AAAA;;;;;;;GAOG;AAyDH;;;;;GAKG;AACH,wBAAsB,aAAa,CAAC,IAAI,EAAE;IACxC,MAAM,CAAC,EAAE,MAAM,CAAC;IAChB,KAAK,CAAC,EAAE,MAAM,GAAG,IAAI,CAAC;IACtB,eAAe,EAAE,MAAM,EAAE,CAAC;IAC1B,YAAY,EAAE,MAAM,CAAC;CACtB,gBA8DA"}

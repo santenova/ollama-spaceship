@@ -1,8 +1,13 @@
-# `apis/` — AI Client Library
+# Ollama-Spaceship
+a feature rich Ollama Client
 
-Complete reference for every module in `src/apis/`.  
-The entry points are **`client.ts`** (low-level singleton) and **`ClientLibrary.ts`** (high-level class wrapper).
+```
 
+## Development entry points are
+
+apis/client.ts ->  (low-level singleton)
+apis/ClientLibrary.ts -> (high-level class wrapper).
+```
 ---
 
 ## Table of Contents

@@ -1,13 +1,10 @@
-
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   return {
     plugins: [
-      react(),
     ].filter(Boolean),
     server: {
       host: '0.0.0.0', // Bind to all interfaces for container access
@@ -15,6 +12,23 @@ export default defineConfig(({ mode }) => {
       strictPort: true,
       // Allow all hosts - essential for Modal tunnel URLs
       allowedHosts: true,
+      base: 'docs',
+      app: 'index.html',
+      build: {
+      rollupOptions: {
+        onwarn(warning, warn) {
+          // Treat import errors as fatal errors
+          if (
+            warning.code === "UNRESOLVED_IMPORT" ||
+            warning.code === "MISSING_EXPORT"
+          ) {
+            throw new Error(`Build failed: ${warning.message}`);
+          }
+          // Use default for other warnings
+          warn(warning);
+        },
+      },
+    },
       proxy: {
         '/proxy': {
           target: process.env.VITE_PROXY_TARGET_OLLAMA || 'http://localhost:11434', // Replace with the actual Ollama API URL

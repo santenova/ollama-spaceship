@@ -516,4 +516,3 @@ export class ClientLibrary {
 /** Singleton instance — import and use directly without instantiating. */
 export const clientLibrary = new ClientLibrary();
 
-console.log(clientLibrary);
