@@ -1,0 +1,1 @@
+{"version":3,"file":"abort-manager.d.ts","sourceRoot":"","sources":["abort-manager.ts"],"names":[],"mappings":"AAAA;;;GAGG;AAIH,eAAO,MAAM,YAAY;IACvB,gEAAgE;iBACpD,MAAM,GAAc,eAAe;IAQ/C,0CAA0C;iBAC9B,MAAM,GAAc,WAAW,GAAG,SAAS;IAIvD,uCAAuC;iBAC3B,MAAM;IAQlB,iCAAiC;;IAQjC,4DAA4D;kBAC9C,MAAM,GAAG,OAAO;CAI/B,CAAC"}
