@@ -1,6 +1,6 @@
 # Ollama-Spaceship
 
-![Ollama-Spaceship](http://url/to/img.png)
+![Ollama-Spaceship](https://github.com/santenova/ollama-spaceship/blob/main/images/ollama-spaceship.png)
 
 ## why do we need this
 
