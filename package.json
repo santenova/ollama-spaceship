@@ -7,13 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "typecheck": "tsc -p ./jsconfig.json",
+    "typecheck": "tsc -p ./tsconfig.json",
     "preview": "vite preview",
     "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "test:watch": "node --experimental-vm-modules node_modules/.bin/jest --watch",
     "test:fail": "node --experimental-vm-modules node_modules/.bin/jest --reporters=./jest-fail-reporter.cjs",
-    "jest": "node --experimental-vm-modules node_modules/.bin/jest",
-    "jest:watch": "node --experimental-vm-modules node_modules/.bin/jest --watch",
     "test:client": "npx tsx src/apis/client.test.ts",
     "docs": "npx typedoc --entryPoints src --entryPointStrategy expand --out docs/api --tsconfig tsconfig.test.json --skipErrorChecking"
   },
@@ -35,7 +33,9 @@
     "typescript": "^6.0.3"
   },
   "dependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
     "autoprefixer": "^10.5.2",
+    "expect": "^30.4.1",
     "jest": "^30.4.2",
     "ts-jest": "^29.4.11",
     "tsx": "^4.22.4",
