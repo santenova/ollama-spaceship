@@ -6,6 +6,7 @@
 
 ## why
 
+
 - **🚀 ### Data Sovereignty**:
     Complete data privacy with local deployment - no cloud providers, no third parties reading prompts
 
@@ -21,7 +22,7 @@
 - **⚡ ### Hybrid Architecture**:
     Flexibility to mix local models with cloud APIs where appropriate - best of both worlds
 
-#- **⚡ ## Rapid Deployment**:
+- **⚡ ## Rapid Deployment**:
     Clone-ready infrastructure allows enterprises to launch their AI marketplace in weeks, not months
 
 
