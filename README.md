@@ -7,22 +7,22 @@
 ## why
 
 
-- **🚀 ### Data Sovereignty**:
+- **🚀  Data Sovereignty**:
     Complete data privacy with local deployment - no cloud providers, no third parties reading prompts
 
-- **📁 ### GDPR Compliance ✅**:
+- **📁  GDPR Compliance ✅**:
     Perfect for companies bound by GDPR, industry regulations, or government restrictions on AI usage
 
-- **⚡ ### Zero Operational AI Costs**:
+- **⚡  Zero Operational AI Costs**:
     No token costs, no API fees - use open-source models like Ollama, reducing AI spending by 90%
 
-- **⚡ ### Geopolitical Independence**:
+- **⚡  Geopolitical Independence**:
     No dependency on US tech giants or foreign governments - critical advantage in current market
 
-- **⚡ ### Hybrid Architecture**:
+- **⚡  Hybrid Architecture**:
     Flexibility to mix local models with cloud APIs where appropriate - best of both worlds
 
-- **⚡ ## Rapid Deployment**:
+- **⚡  Rapid Deployment**:
     Clone-ready infrastructure allows enterprises to launch their AI marketplace in weeks, not months
 
 
