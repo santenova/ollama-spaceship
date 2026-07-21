@@ -1178,13 +1178,13 @@ export const createclientWithFallback = (_originalclient?: any) => {
 // createEsEntities returns a Proxy: client.entities.Persona.list(), .filter(), .get(), etc.
 export const esConfig = getEsConfig();
 
-export const baseClient = _local
+const baseClient = _local
   ? { ...defaultClient, entities: esEntities }
   : createclientWithFallback({ ...defaultClient, entities: esEntities });
 
 baseClient.entities = esEntities;
 
-export const client = createclientWithFallback(baseClient);
+// export const client = createclientWithFallback(baseClient);
 
 // Direct access to ES-backed entities and config helpers
 export { esEntities, getEsConfig, saveEsConfig, createEsEntities, getIndexPrefix, setIndexPrefix };

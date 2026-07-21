@@ -7,7 +7,6 @@
       "moduleResolution": "Bundler",
       "outDir": "./dist/",
       "rootDir": "src",
-      "declarationDir": "./dist/types",
       "strict": false,
       "esModuleInterop": true,
       "forceConsistentCasingInFileNames": true,
