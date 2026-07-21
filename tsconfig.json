@@ -17,5 +17,6 @@
       "declaration": true,
       "declarationMap": false,
       "allowSyntheticDefaultImports": true,
+      "types": ["jest", "node"]
     }
   }
