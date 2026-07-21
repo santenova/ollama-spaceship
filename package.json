@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "vite",
     "pub": "npm run docs; echo '<meta http-equiv=\"refresh\" content=\"0; url=./docs/index.html\" />' >index.html;",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b",
     "benchmark": "npx tsx src/apis/lib/triple-validation-cli.ts --cases",
     "backend": "cd data && python3 -m venv venv; ./venv/bin/pip3 install -r requirements.txt;",
     "ingest": "cd data && for j in *json; do i=$(echo \"$j\" | sed 's/.json//' | tr [A-Z] [a-z]); ./venv/bin/python3 ./import.py --url http://127.0.0.1:9200 --file \"$j\" --index \"prompt-hub-$i\"; done",
@@ -40,14 +40,15 @@
     "@types/node": "^26.1.1",
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.19",
-    "typescript": "^5.9.3",
     "vite": "^5.0.8"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^6.9.1",
     "autoprefixer": "^10.5.2",
+    "axios": "^1.18.1",
     "expect": "^30.4.1",
     "jest": "^30.4.2",
+    "tailwindcss": "^4.3.3",
     "ts-jest": "^29.4.11",
     "tsx": "^4.22.4",
     "vaul": "^1.1.2",
