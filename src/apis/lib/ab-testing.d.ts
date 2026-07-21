@@ -40,4 +40,3 @@ export declare function splitTest(variants: ABVariant[], opts: {
 }, ollamaEndpoints: string[], defaultModel: string): Promise<ABTestResult>;
 /** Retrieve past A/B test results from ES. */
 export declare function getABTestHistory(limit?: number): Promise<ABTestResult[]>;
-//# sourceMappingURL=ab-testing.d.ts.map

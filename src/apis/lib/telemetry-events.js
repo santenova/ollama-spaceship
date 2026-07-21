@@ -36,5 +36,10 @@ export const TelemetryEvents = {
     GROUND_CHECK_COMPLETE: 'ground-check:complete',
     // Triple validation benchmark
     TRIPLE_VALIDATION_START: 'triple-validation:start',
+    TRIPLE_VALIDATION_PROGRESS: 'triple-validation:progress',
     TRIPLE_VALIDATION_COMPLETE: 'triple-validation:complete',
+    // Persona auto-suggest
+    PERSONA_AUTOSUGGEST_REQUEST: 'persona:autosuggest-request',
+    PERSONA_AUTOSUGGEST_KEYWORDS: 'persona:autosuggest-keywords',
+    PERSONA_AUTOSUGGEST_SEARCH: 'persona:autosuggest-search',
 };

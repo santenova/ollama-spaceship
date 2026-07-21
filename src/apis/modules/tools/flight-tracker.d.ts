@@ -18,4 +18,3 @@ export declare function flightTracker(opts: {
     ollamaEndpoints: string[];
     defaultModel: string;
 }): Promise<any>;
-//# sourceMappingURL=flight-tracker.d.ts.map

@@ -17,4 +17,3 @@ export declare function webSearch(opts: {
     ollamaEndpoints: string[];
     defaultModel: string;
 }): Promise<any>;
-//# sourceMappingURL=websearch-tools.d.ts.map

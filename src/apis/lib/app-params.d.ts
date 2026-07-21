@@ -23,4 +23,3 @@ export declare const appParams: {
     appBaseUrl: any;
 };
 export declare const appBaseUrl: any;
-//# sourceMappingURL=app-params.d.ts.map

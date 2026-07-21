@@ -18,4 +18,3 @@ export declare class LocationService {
     /** Clear the cached location — next call will re-fetch. */
     static clearCache(): void;
 }
-//# sourceMappingURL=location.d.ts.map

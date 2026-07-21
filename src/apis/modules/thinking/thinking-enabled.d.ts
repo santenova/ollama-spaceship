@@ -22,4 +22,3 @@ interface ThinkingEnabledResult {
  */
 export declare function thinkingEnabled(prompt: string, config: ThinkingEnabledConfig): Promise<ThinkingEnabledResult>;
 export {};
-//# sourceMappingURL=thinking-enabled.d.ts.map

@@ -6,7 +6,7 @@ module.exports = {
   testMatch: ['**/__tests__/**/*.test.ts'],
   moduleFileExtensions: ['ts', 'js', 'json'],
   extensionsToTreatAsEsm: ['.ts'],
-  setupFiles: ['<rootDir>/src/jest.setup.ts'],
+  setupFiles: ['<rootDir>/src/jest.setup.js'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },

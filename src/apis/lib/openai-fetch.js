@@ -8,10 +8,25 @@ export function resolveEndpoint(ollamaEndpoints) {
 }
 /** POST to /v1/chat/completions and return parsed response text (or JSON). */
 export async function chatCompletion(ollamaEndpoints, model, messages, opts = {}) {
+    const result = await chatCompletionWithUsage(ollamaEndpoints, model, messages, opts);
+    if (opts.response_json_schema) {
+        try {
+            return JSON.parse(result.content);
+        }
+        catch {
+            return result.content;
+        }
+    }
+    return result.content;
+}
+/** POST to /v1/chat/completions and return content + token usage metadata. */
+export async function chatCompletionWithUsage(ollamaEndpoints, model, messages, opts = {}) {
     const endpoint = resolveEndpoint(ollamaEndpoints);
     const body = { model, messages, stream: false };
     if (opts.temperature !== undefined)
         body.temperature = opts.temperature;
+    if (opts.max_tokens !== undefined)
+        body.max_tokens = opts.max_tokens;
     if (opts.response_json_schema) {
         body.response_format = {
             type: 'json_schema',
@@ -30,15 +45,15 @@ export async function chatCompletion(ollamaEndpoints, model, messages, opts = {}
     }
     const data = await res.json();
     const content = data?.choices?.[0]?.message?.content ?? '';
-    if (opts.response_json_schema) {
-        try {
-            return JSON.parse(content);
+    const usageRaw = data?.usage;
+    const usage = usageRaw
+        ? {
+            prompt_tokens: usageRaw.prompt_tokens ?? 0,
+            completion_tokens: usageRaw.completion_tokens ?? 0,
+            total_tokens: usageRaw.total_tokens ?? 0,
         }
-        catch {
-            return content;
-        }
-    }
-    return content;
+        : null;
+    return { content, usage };
 }
 /** POST to /v1/embeddings and return the embedding vector. */
 export async function embedText(ollamaEndpoints, model, text, signal) {

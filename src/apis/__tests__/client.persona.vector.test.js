@@ -149,7 +149,7 @@ describe('Persona vector index pipeline', () => {
         const sourceIndex = `${prefix}-persona`;
         vectorIndex = `${prefix}-persona-vector`;
         // ── STEP 1: Fetch all personas via esEntities ───────────────────────────
-        const personas = await client.esEntities.Persona.list('-created_date', 200);
+        const personas = await client.esEntities.Persona.list('-created_date', 2000);
         expect(Array.isArray(personas)).toBe(true);
         // Find (or synthesise) a Marine Biologist persona for validation
         marineBiologist =

@@ -42,4 +42,3 @@ export declare function runDueJobs(ollamaEndpoints: string[], defaultModel: stri
 export declare function setJobStatus(jobId: string, status: 'active' | 'paused'): Promise<void>;
 export declare function cancelJob(jobId: string): Promise<void>;
 export declare function listJobs(status?: ScheduledJob['status']): Promise<ScheduledJob[]>;
-//# sourceMappingURL=scheduled-jobs.d.ts.map

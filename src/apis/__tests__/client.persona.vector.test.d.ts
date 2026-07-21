@@ -16,4 +16,3 @@
  * Requires: Ollama @ 127.0.0.1:11434, Elasticsearch @ 127.0.0.1:9200
  */
 export {};
-//# sourceMappingURL=client.persona.vector.test.d.ts.map

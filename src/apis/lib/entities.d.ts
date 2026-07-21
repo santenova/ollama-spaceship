@@ -6,4 +6,3 @@
  * @internal
  */
 export declare function createEntitiesModule(config: any): {};
-//# sourceMappingURL=entities.d.ts.map

@@ -63,4 +63,3 @@ export interface ProgressTracker {
     readonly elapsed: number;
 }
 export declare function createProgressTracker(location?: GeoLocation): ProgressTracker;
-//# sourceMappingURL=progress-tracker.d.ts.map

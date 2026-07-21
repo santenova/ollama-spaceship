@@ -15,13 +15,45 @@ export async function chatCompletion(
   messages: Array<{ role: string; content: string }>,
   opts: {
     temperature?: number;
+    max_tokens?: number;
     response_json_schema?: Record<string, any> | null;
     signal?: AbortSignal;
   } = {},
 ): Promise<string | any> {
+  const result = await chatCompletionWithUsage(ollamaEndpoints, model, messages, opts);
+  if (opts.response_json_schema) {
+    try { return JSON.parse(result.content); } catch { return result.content; }
+  }
+  return result.content;
+}
+
+export interface ChatCompletionUsage {
+  prompt_tokens: number;
+  completion_tokens: number;
+  total_tokens: number;
+}
+
+export interface ChatCompletionResult {
+  content: string;
+  usage: ChatCompletionUsage | null;
+}
+
+/** POST to /v1/chat/completions and return content + token usage metadata. */
+export async function chatCompletionWithUsage(
+  ollamaEndpoints: string[],
+  model: string,
+  messages: Array<{ role: string; content: string }>,
+  opts: {
+    temperature?: number;
+    max_tokens?: number;
+    response_json_schema?: Record<string, any> | null;
+    signal?: AbortSignal;
+  } = {},
+): Promise<ChatCompletionResult> {
   const endpoint = resolveEndpoint(ollamaEndpoints);
   const body: Record<string, any> = { model, messages, stream: false };
   if (opts.temperature !== undefined) body.temperature = opts.temperature;
+  if (opts.max_tokens !== undefined) body.max_tokens = opts.max_tokens;
   if (opts.response_json_schema) {
     body.response_format = {
       type: 'json_schema',
@@ -43,11 +75,16 @@ export async function chatCompletion(
 
   const data: any = await res.json();
   const content: string = data?.choices?.[0]?.message?.content ?? '';
+  const usageRaw = data?.usage;
+  const usage: ChatCompletionUsage | null = usageRaw
+    ? {
+        prompt_tokens: usageRaw.prompt_tokens ?? 0,
+        completion_tokens: usageRaw.completion_tokens ?? 0,
+        total_tokens: usageRaw.total_tokens ?? 0,
+      }
+    : null;
 
-  if (opts.response_json_schema) {
-    try { return JSON.parse(content); } catch { return content; }
-  }
-  return content;
+  return { content, usage };
 }
 
 /** POST to /v1/embeddings and return the embedding vector. */

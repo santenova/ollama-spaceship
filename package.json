@@ -1,18 +1,26 @@
 {
-  "name": "Ollama-Spaceship",
-  "version": "1.0.0",
+  "name": "@santex/sdk",
+  "version": "1.0.5",
   "description": "Complete reference for every module in `src/apis/`.   The entry points are **`client.ts`** (low-level singleton) and **`ClientLibrary.ts`** (high-level class wrapper).",
-  "main": "postcss.config.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "npm run docs; echo '<meta http-equiv=\"refresh\" content=\"0; url=./docs/index.html\" />' >index.html; vite build",
+    "pub": "npm run docs; echo '<meta http-equiv=\"refresh\" content=\"0; url=./docs/index.html\" />' >index.html;",
+    "build": "tsc -b && vite build",
+    "benchmark": "npx tsx src/apis/lib/triple-validation-cli.ts --cases",
+    "backend": "cd data && python3 -m venv venv; ./venv/bin/pip3 install -r requirements.txt;",
+    "ingest": "cd data && for j in *json; do i=$(echo \"$j\" | sed 's/.json//' | tr [A-Z] [a-z]); ./venv/bin/python3 ./import.py --url http://127.0.0.1:9200 --file \"$j\" --index \"prompt-hub-$i\"; done",
     "lint": "eslint .",
     "typecheck": "tsc -p ./tsconfig.json",
     "preview": "vite preview",
-    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest --verbose",
     "test:watch": "node --experimental-vm-modules node_modules/.bin/jest --watch",
     "test:fail": "node --experimental-vm-modules node_modules/.bin/jest --reporters=./jest-fail-reporter.cjs",
-    "test:client": "npx tsx src/apis/client.test.ts",
     "docs": "cp  -r images dist/; npx typedoc --customCss ./images/style.css --entryPoints src --entryPointStrategy expand --out docs --tsconfig tsconfig.test.json --skipErrorChecking"
   },
   "repository": {
@@ -28,10 +36,12 @@
   "homepage": "https://github.com/santenova/ollama-spaceship#readme",
   "devDependencies": {
     "@tsconfig/node20": "^20.1.9",
-    "@types/node": "^26.0.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^26.1.1",
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.19",
-    "typescript": "^6.0.3"
+    "typescript": "^5.9.3",
+    "vite": "^5.0.8"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^6.9.1",
@@ -41,6 +51,7 @@
     "ts-jest": "^29.4.11",
     "tsx": "^4.22.4",
     "vaul": "^1.1.2",
+    "vite": "^5.0.8",
     "zod": "^4.4.3"
   }
 }

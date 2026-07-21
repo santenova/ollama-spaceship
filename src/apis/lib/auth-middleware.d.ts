@@ -11,4 +11,3 @@ export declare function createAuthMiddleware(opts: AuthMiddlewareOptions): {
     withAuth: (url: string, init?: RequestInit) => Promise<Response>;
 };
 export {};
-//# sourceMappingURL=auth-middleware.d.ts.map

@@ -41,4 +41,3 @@ export declare const promptRouter: {
      */
     enhance(raw: string, opts?: EnhanceOptions): Promise<string>;
 };
-//# sourceMappingURL=prompt-router.d.ts.map

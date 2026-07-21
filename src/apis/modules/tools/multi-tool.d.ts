@@ -19,4 +19,3 @@ export declare function multiToolRun(opts: {
     ollamaEndpoints: string[];
     defaultModel: string;
 }): Promise<any>;
-//# sourceMappingURL=multi-tool.d.ts.map

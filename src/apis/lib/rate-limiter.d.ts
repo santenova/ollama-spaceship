@@ -29,4 +29,3 @@ export interface RateLimiter {
     reset(): void;
 }
 export declare function createRateLimiter(name: string, opts?: RateLimiterOptions): RateLimiter;
-//# sourceMappingURL=rate-limiter.d.ts.map

@@ -171,7 +171,7 @@ describe('Persona vector index pipeline', () => {
     // ── STEP 1: Fetch all personas via esEntities ───────────────────────────
     const personas: PersonaEmbeddingInput[] = await (client.esEntities as any).Persona.list(
       '-created_date',
-      200,
+      2000,
     );
     expect(Array.isArray(personas)).toBe(true);
 

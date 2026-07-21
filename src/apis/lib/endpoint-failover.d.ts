@@ -35,4 +35,3 @@ export declare function getEndpointHealth(): Array<{
 }>;
 /** Reset all cached health state (e.g. after config change). */
 export declare function resetEndpointHealth(): void;
-//# sourceMappingURL=endpoint-failover.d.ts.map

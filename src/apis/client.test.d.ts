@@ -48,10 +48,9 @@ declare function testC25StreamResponseVision(): Promise<TestResult>;
 declare function testC26StreamResponseAbort(): Promise<TestResult>;
 declare function testC22ClientInfraWiring(): Promise<TestResult>;
 declare function testD1CostEstimator(): Promise<TestResult>;
-declare function testE1OpenAIFetch(): Promise<TestResult>;
+declare function testE2GroundCheckNoSources(): Promise<TestResult>;
 declare const SUITE_D: (typeof testD1CostEstimator)[];
-declare const SUITE_E: (typeof testE1OpenAIFetch)[];
+declare const SUITE_E: (typeof testE2GroundCheckNoSources)[];
 export { SUITE_D, SUITE_E };
 export declare function runSuiteD(): Promise<void>;
 export declare function runSuiteE(): Promise<void>;
-//# sourceMappingURL=client.test.d.ts.map

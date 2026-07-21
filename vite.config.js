@@ -54,7 +54,7 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        '@': './src',
       },
       extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json']
     },

@@ -6,4 +6,3 @@
  * No fetch mocks — every test hits a live service.
  */
 export {};
-//# sourceMappingURL=client.integration.test.d.ts.map

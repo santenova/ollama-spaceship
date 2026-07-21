@@ -20,4 +20,3 @@ export declare function createCircuitBreaker(name: string, opts?: CircuitBreaker
     reset(): void;
 };
 export {};
-//# sourceMappingURL=circuit-breaker.d.ts.map

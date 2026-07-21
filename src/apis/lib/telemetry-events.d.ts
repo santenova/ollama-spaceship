@@ -29,7 +29,10 @@ export declare const TelemetryEvents: {
     readonly JOB_CANCELLED: "job:cancelled";
     readonly GROUND_CHECK_COMPLETE: "ground-check:complete";
     readonly TRIPLE_VALIDATION_START: "triple-validation:start";
+    readonly TRIPLE_VALIDATION_PROGRESS: "triple-validation:progress";
     readonly TRIPLE_VALIDATION_COMPLETE: "triple-validation:complete";
+    readonly PERSONA_AUTOSUGGEST_REQUEST: "persona:autosuggest-request";
+    readonly PERSONA_AUTOSUGGEST_KEYWORDS: "persona:autosuggest-keywords";
+    readonly PERSONA_AUTOSUGGEST_SEARCH: "persona:autosuggest-search";
 };
 export type TelemetryEvent = typeof TelemetryEvents[keyof typeof TelemetryEvents];
-//# sourceMappingURL=telemetry-events.d.ts.map

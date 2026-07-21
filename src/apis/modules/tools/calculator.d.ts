@@ -18,4 +18,3 @@ export declare function calculator(opts: {
     ollamaEndpoints: string[];
     defaultModel: string;
 }): Promise<any>;
-//# sourceMappingURL=calculator.d.ts.map

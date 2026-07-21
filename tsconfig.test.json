@@ -9,6 +9,10 @@
     "resolveJsonModule": true,
     "lib": ["ES2020", "DOM"],
     "types": ["jest", "node"],
-    "strict": false
+    "strict": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/**"]
+    }
   }
 }

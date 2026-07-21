@@ -11,4 +11,3 @@ export declare function createFunctionsModule(axios: any, appId: any, config: an
     invoke(functionName: any, data: any): Promise<any>;
     fetch(path: any, init?: Record<string, any>): Promise<Response>;
 };
-//# sourceMappingURL=functions.d.ts.map

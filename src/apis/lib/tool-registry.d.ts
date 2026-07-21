@@ -18,4 +18,3 @@ export declare const toolRegistry: {
     toCoreIntegrations(): Record<string, ToolHandler>;
 };
 export {};
-//# sourceMappingURL=tool-registry.d.ts.map

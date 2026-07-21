@@ -13,4 +13,3 @@ interface ThinkingLevelsConfig {
  */
 export declare function thinkingLevels(prompt: string, config: ThinkingLevelsConfig): Promise<void>;
 export {};
-//# sourceMappingURL=thinking-levels.d.ts.map

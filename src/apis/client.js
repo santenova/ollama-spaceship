@@ -1,22 +1,20 @@
 import axios from 'axios'; // Import axios directly
-import { appId, token, functionsVersion, localStorage, LS_PREFIX } from "../apis/lib/app-params";
-import { createEsEntities, getEsConfig, saveEsConfig, esEntities, getIndexPrefix, setIndexPrefix } from "../apis/lib/es-entities";
-import { validateClientConfig } from "../apis/lib/config-schema";
-import { clientLogger } from "../apis/lib/client-logger";
+import { appId, token, functionsVersion, localStorage, LS_PREFIX } from "@/apis/lib/app-params";
+import { createEsEntities, getEsConfig, saveEsConfig, esEntities, getIndexPrefix, setIndexPrefix } from "@/apis/lib/es-entities";
+import { validateClientConfig } from "@/apis/lib/config-schema";
+import { clientLogger } from "@/apis/lib/client-logger";
 export { clientLogger };
-import { createCircuitBreaker } from "../apis/lib/circuit-breaker";
-import { telemetry } from "../apis/lib/telemetry";
-import { toolRegistry } from "../apis/lib/tool-registry";
-import { modelRouter } from "../apis/lib/model-router";
-import { promptRouter } from "../apis/lib/prompt-router";
-import { createBatcher } from "../apis/lib/request-batcher";
-import { createAuthMiddleware } from "../apis/lib/auth-middleware";
-import { trackedOllamaFetch } from "../apis/lib/ollama-tracker";
-import { abortManager } from "../apis/lib/abort-manager";
+import { createCircuitBreaker } from "@/apis/lib/circuit-breaker";
+import { telemetry } from "@/apis/lib/telemetry";
+import { toolRegistry } from "@/apis/lib/tool-registry";
+import { modelRouter } from "@/apis/lib/model-router";
+import { promptRouter } from "@/apis/lib/prompt-router";
+import { createBatcher } from "@/apis/lib/request-batcher";
+import { createAuthMiddleware } from "@/apis/lib/auth-middleware";
+import { trackedOllamaFetch } from "@/apis/lib/ollama-tracker";
+import { abortManager } from "@/apis/lib/abort-manager";
 import { webSearch } from "../apis/modules/websearch/websearch-tools";
 import { multiToolRun } from "../apis/modules/tools/multi-tool";
-import { thinkingStreamingFetch } from "../apis/modules/thinking/thinking-streaming";
-import { thinkingEnabled } from "../apis/modules/thinking/thinking-enabled";
 import { thinkingLevels } from "../apis/modules/thinking/thinking-levels";
 import { flightTracker } from "../apis/modules/tools/flight-tracker";
 import { calculator } from "../apis/modules/tools/calculator";
@@ -24,11 +22,86 @@ import { vectorPipeline } from "./modules/vector/vector-pipeline";
 import { safeExecute } from "./lib/safe-execute";
 import { TelemetryEvents } from "./lib/telemetry-events";
 import { expandQuery as _expandQuery, solution as _solution, beaming as _beaming } from "./lib/task-orchestrator";
-import { createRateLimiter } from "../apis/lib/rate-limiter";
-import { createProgressTracker } from "../apis/lib/progress-tracker";
-import { LocationService } from "../apis/lib/location";
+import { createRateLimiter } from "@/apis/lib/rate-limiter";
+import { createProgressTracker } from "@/apis/lib/progress-tracker";
+import { LocationService } from "@/apis/lib/location";
 export const _local = true;
-// Dump localStorage as a table
+/**
+ * Streams thoughts and responses from the LLM. Returns the accumulated
+ * thinking trace and content after the stream closes.
+ */
+export async function thinkingStreamingFetch(prompt, config) {
+    const host = config.ollamaEndpoints[1] ||
+        config.ollamaEndpoints[0] ||
+        'http://localhost:11434';
+    const useModel = config.model || config.defaultModel || 'qwen3:0.6b';
+    const res = await fetch(`${host}/v1/chat/completions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            model: useModel,
+            messages: [{ role: 'user', content: prompt }],
+            stream: true,
+            think: true,
+        }),
+    });
+    if (!res.ok) {
+        throw new Error(`thinkingStreamingFetch error: ${res.status}: ${await res.text().catch(() => '')}`);
+    }
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let thinkBuf = '';
+    let contentBuf = '';
+    let chunks = 0;
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done)
+            break;
+        chunks++;
+        for (const line of decoder.decode(value).split('\n')) {
+            const trimmed = line.replace(/^data:\s*/, '').trim();
+            if (!trimmed || trimmed === '[DONE]')
+                continue;
+            try {
+                const json = JSON.parse(trimmed);
+                const delta = json?.choices?.[0]?.delta;
+                if (delta?.thinking)
+                    thinkBuf += delta.thinking;
+                if (delta?.content)
+                    contentBuf += delta.content;
+            }
+            catch {
+                // partial JSON across chunk boundaries — skip
+            }
+        }
+    }
+    return { thinking: thinkBuf, content: contentBuf, chunks };
+}
+export async function thinkingEnabled(prompt, config) {
+    const host = config.ollamaEndpoints[1] ||
+        config.ollamaEndpoints[0] ||
+        'http://localhost:11434';
+    const useModel = config.model || config.defaultModel || 'qwen3:0.6b';
+    const res = await fetch(`${host}/v1/chat/completions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            model: useModel,
+            messages: [{ role: 'user', content: prompt }],
+            stream: false,
+            think: true,
+        }),
+    });
+    if (!res.ok) {
+        throw new Error(`thinkingEnabled error: ${res.status}: ${await res.text().catch(() => '')}`);
+    }
+    const data = await res.json();
+    const message = data?.choices?.[0]?.message ?? {};
+    return {
+        thinking: message.thinking ?? '',
+        content: message.content ?? '',
+    };
+}
 export function dumpObject(obj) {
     if (obj) {
         const keys = Object.keys(obj);

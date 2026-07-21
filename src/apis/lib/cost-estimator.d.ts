@@ -51,4 +51,3 @@ export declare function finaliseEstimate(estimate: CostEstimate, actualOutputTok
 /** Return the full pricing table (useful for a cost dashboard). */
 export declare function getPricingTable(): typeof MODEL_PRICING;
 export {};
-//# sourceMappingURL=cost-estimator.d.ts.map

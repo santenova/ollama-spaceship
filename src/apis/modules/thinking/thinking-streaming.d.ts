@@ -24,4 +24,3 @@ interface ThinkingStreamingResult {
  */
 export declare function thinkingStreamingFetch(prompt: string, config: ThinkingStreamingConfig): Promise<ThinkingStreamingResult>;
 export {};
-//# sourceMappingURL=thinking-streaming.d.ts.map

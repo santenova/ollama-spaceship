@@ -27,11 +27,13 @@ export interface CaseResult {
     utterance: string;
     triple: string;
     expected: boolean;
-    predicted: boolean | null;
+    actual: boolean | null;
+    passed: boolean;
     raw: string;
 }
 export interface ModelScore {
     model: string;
+    endpoint: string;
     correct: number;
     wrong: number;
     /** Model answered True on an invalid case. */
@@ -42,6 +44,10 @@ export interface ModelScore {
     total: number;
     /** correct / total (0 when no cases). */
     accuracy: number;
+    promptTokens: number;
+    completionTokens: number;
+    totalTokens: number;
+    durationMs: number;
     perCase?: CaseResult[];
 }
 export interface TripleValidationReport {
@@ -49,6 +55,7 @@ export interface TripleValidationReport {
     testCaseCount: number;
     validCount: number;
     invalidCount: number;
+    endpoint: string;
     created_date: string;
 }
 /**
@@ -65,5 +72,6 @@ export declare function tripleValidation(ollamaEndpoints: string[], defaultModel
     testCaseIndex?: string;
     signal?: AbortSignal;
     includePerCase?: boolean;
+    caseLimit?: number;
+    modelLimit?: number;
 }): Promise<TripleValidationReport>;
-//# sourceMappingURL=triple-validation.d.ts.map

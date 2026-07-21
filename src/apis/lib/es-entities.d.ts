@@ -46,4 +46,3 @@ export declare function getEsEndpoint(): any;
 export declare function ensureEsIndex(endpoint: string, index: string, mappings?: Record<string, any>): Promise<void>;
 export declare function createEsEntities(getConfig: any): {};
 export declare const esEntities: {};
-//# sourceMappingURL=es-entities.d.ts.map

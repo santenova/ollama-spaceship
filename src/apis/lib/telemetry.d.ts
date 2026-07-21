@@ -10,4 +10,3 @@ export declare const telemetry: {
     on(event: TelemetryEvent, handler: TelemetryHandler): () => boolean;
     emit(event: TelemetryEvent, payload?: Record<string, any>): void;
 };
-//# sourceMappingURL=telemetry.d.ts.map

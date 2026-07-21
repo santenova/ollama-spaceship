@@ -12,4 +12,3 @@
  * emits ollama:stream-complete with the full text + token count on finish.
  */
 export declare function trackedOllamaFetch(url: string, init: RequestInit, label?: string): Promise<Response>;
-//# sourceMappingURL=ollama-tracker.d.ts.map

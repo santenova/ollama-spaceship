@@ -31,4 +31,3 @@ interface SafeExecuteOpts<T> {
  */
 export declare function safeExecute<T>(opts: SafeExecuteOpts<T>): Promise<T>;
 export {};
-//# sourceMappingURL=safe-execute.d.ts.map

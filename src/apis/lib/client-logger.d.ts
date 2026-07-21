@@ -13,4 +13,3 @@ export declare const clientLogger: {
     timed: <T>(label: string, fn: () => Promise<T>, ctx?: Record<string, any>) => Promise<T>;
 };
 export {};
-//# sourceMappingURL=client-logger.d.ts.map

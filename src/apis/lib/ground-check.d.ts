@@ -26,4 +26,3 @@ export interface GroundCheckResult {
  * @param embeddingModel Model to use for embedding (default: nomic-embed-text).
  */
 export declare function groundCheck(response: string, sourceDocIds: string[], ollamaEndpoints: string[], model: string, embeddingModel?: string): Promise<GroundCheckResult>;
-//# sourceMappingURL=ground-check.d.ts.map

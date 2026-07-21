@@ -14,4 +14,3 @@ export declare const abortManager: {
     /** Check if a key has an active (non-aborted) controller */
     isActive(key: string): boolean;
 };
-//# sourceMappingURL=abort-manager.d.ts.map

@@ -38,7 +38,7 @@ export declare function vectorPipeline(opts: VectorPipelineOpts): Promise<{
     }[];
     enrichedCount: number;
     vectorKey: number[];
-    sourceIndices?: never;
+    sourceIndices?: undefined;
 } | {
     mode: "multi";
     keywords: string[];
@@ -48,7 +48,7 @@ export declare function vectorPipeline(opts: VectorPipelineOpts): Promise<{
     reindexStats: any[];
     enrichedCount: number;
     vectorKey: number[];
-    sourceIndex?: never;
+    sourceIndex?: undefined;
 } | {
     mode: "all";
     keywords: string[];
@@ -61,8 +61,7 @@ export declare function vectorPipeline(opts: VectorPipelineOpts): Promise<{
     enrichedCount: number;
     targetIndex: string;
     vectorKey: number[];
-    sourceIndex?: never;
-    sourceIndices?: never;
+    sourceIndex?: undefined;
+    sourceIndices?: undefined;
 }>;
 export {};
-//# sourceMappingURL=vector-pipeline.d.ts.map

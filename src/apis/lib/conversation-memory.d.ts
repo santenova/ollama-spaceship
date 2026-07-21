@@ -32,4 +32,3 @@ export declare function recallMemory(userEmail: string, queryText: string, ollam
 export declare function buildMemoryContext(userEmail: string, queryText: string, ollamaEndpoints: string[], embeddingModel?: string, topK?: number): Promise<string | null>;
 /** Delete all memory turns for a user. */
 export declare function clearMemory(userEmail: string): Promise<void>;
-//# sourceMappingURL=conversation-memory.d.ts.map

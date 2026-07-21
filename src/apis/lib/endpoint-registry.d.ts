@@ -20,4 +20,3 @@ export declare const endpointRegistry: {
     /** Invalidate cache (e.g. for tests) */
     invalidate(): void;
 };
-//# sourceMappingURL=endpoint-registry.d.ts.map
