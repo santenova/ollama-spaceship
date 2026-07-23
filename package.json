@@ -1,9 +1,8 @@
 {
   "name": "@santex/sdk",
-  "version": "1.0.6",
-  "description": "Complete reference for every module in `src/apis/`.   The entry points are **`client.ts`** (low-level singleton) and **`ClientLibrary.ts`** (high-level class wrapper).",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "version": "1.0.7",
+  "main": "dist/apis/ClientLibrary.js",
+  "types": "dist/apis/ClientLibrary.d.ts",
   "type": "module",
   "files": [
     "dist"
@@ -32,6 +31,9 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/santenova/ollama-spaceship/issues"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "homepage": "https://github.com/santenova/ollama-spaceship#readme",
   "devDependencies": {
