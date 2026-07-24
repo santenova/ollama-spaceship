@@ -336,7 +336,7 @@ export function createClient(config: {
   // ── #3: Circuit breaker for primary API ──
   const circuitBreaker = createCircuitBreaker('primary-api', {
     failureThreshold: 3,
-    recoveryTimeMs: 30_000,
+    recoveryTimeMs: 300_000,
     onStateChange: (state) => {
       if (state === 'open') telemetry.emit(TelemetryEvents.CIRCUIT_OPEN, { name: 'primary-api' });
       if (state === 'closed') telemetry.emit(TelemetryEvents.CIRCUIT_CLOSED, { name: 'primary-api' });
@@ -691,7 +691,7 @@ export function createClient(config: {
             return safeExecute({
               label: 'InvokeLLM',
               fn: () => rateLimiter.run(() =>
-                invokeLLM({ ...params, signal: controller.signal, ollamaEndpoints: resolvedOllamaEndpoints, defaultModel: routedModel })
+                invokeLLM({ ...params, ollamaEndpoints: resolvedOllamaEndpoints, defaultModel: routedModel })
               ),
               circuitBreaker,
             }).finally(() => abortManager.cancel(callId));

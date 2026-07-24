@@ -21,7 +21,7 @@ type StreamTask = 'chat' | 'vision' | 'code' | 'audio' | 'thinking';
 type TaskType = 'chat' | 'thinking' | 'json' | 'vision';
 
 interface StreamObserver {
-  next: (chunk: string | AugmentedChunk) => void;
+  next: (chunk: Object | AugmentedChunk) => void;
   error: (err: Error) => void;
   complete: (summary?: StreamSummary) => void;
 }

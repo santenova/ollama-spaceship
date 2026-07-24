@@ -2,7 +2,10 @@
   "name": "@santex/sdk",
   "version": "1.0.7",
   "main": "dist/apis/ClientLibrary.js",
-  "types": "dist/apis/ClientLibrary.d.ts",
+  "exports": {
+    ".": "./dist/apis/ClientLibrary.js",
+    "./apis": "./dist/apis"
+  },
   "type": "module",
   "files": [
     "dist"
@@ -11,6 +14,9 @@
     "dev": "vite",
     "pub": "npm run docs; echo '<meta http-equiv=\"refresh\" content=\"0; url=./docs/index.html\" />' >index.html;",
     "build": "tsc -b",
+    "docker-elasticsearch": "docker run -p 9200:9200 -p 9300:9300 -e 'discovery.type=single-node' -e 'xpack.security.enabled=false' -m 6GB docker.elastic.co/elasticsearch/elasticsearch:8.4.2;",
+    "docker-ollama": "docker run --name ollama -d --restart unless-stopped -p 11434:11434 -v ./ollama/ollama:/root/.ollama --interactive --tty -e OLLAMA_KEEP_ALIVE=24h -e OLLAMA_HOST=0.0.0.0 ollama/ollama;",
+    "docker-models": "docker exec -it ollama ollama pull qwen3:0.6b; docker exec -it ollama ollama pull llava:7b & docker exec -it ollama ollama  pull qwen3:8b ; docker exec -it ollama ollama  pull nomic-embed-text:latest;",
     "benchmark": "npx tsx src/apis/lib/triple-validation-cli.ts --cases",
     "backend": "cd data && python3 -m venv venv; ./venv/bin/pip3 install -r requirements.txt;",
     "ingest": "cd data && for j in *json; do i=$(echo \"$j\" | sed 's/.json//' | tr [A-Z] [a-z]); ./venv/bin/python3 ./import.py --url http://127.0.0.1:9200 --file \"$j\" --index \"prompt-hub-$i\"; done",
@@ -18,6 +24,7 @@
     "typecheck": "tsc -p ./tsconfig.json",
     "preview": "vite preview",
     "test": "node --experimental-vm-modules node_modules/.bin/jest --verbose",
+    "test-vector": "node --experimental-vm-modules node_modules/.bin/jest --verbose src/apis/__tests__/client.persona.vector.test.ts",
     "test:watch": "node --experimental-vm-modules node_modules/.bin/jest --watch",
     "test:fail": "node --experimental-vm-modules node_modules/.bin/jest --reporters=./jest-fail-reporter.cjs",
     "docs": "cp  -r images dist/; npx typedoc --customCss ./images/style.css --entryPoints src --entryPointStrategy expand --out docs --tsconfig tsconfig.test.json --skipErrorChecking"
@@ -37,11 +44,14 @@
   },
   "homepage": "https://github.com/santenova/ollama-spaceship#readme",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@tsconfig/node20": "^20.1.9",
     "@types/jest": "^30.0.0",
     "@types/node": "^26.1.1",
+    "eslint": "^10.7.0",
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.19",
+    "typescript": "^6.0.3",
     "vite": "^5.0.8"
   },
   "dependencies": {
@@ -50,10 +60,8 @@
     "axios": "^1.18.1",
     "expect": "^30.4.1",
     "jest": "^30.4.2",
-    "tailwindcss": "^4.3.3",
     "ts-jest": "^29.4.11",
     "tsx": "^4.22.4",
-    "vaul": "^1.1.2",
     "vite": "^5.0.8",
     "zod": "^4.4.3"
   }

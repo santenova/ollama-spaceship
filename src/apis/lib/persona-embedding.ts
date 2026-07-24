@@ -61,9 +61,9 @@ export const PERSONA_VECTOR_MAPPING = {
     index: true,
     similarity: 'cosine',
     index_options: {
-      type: 'int8_hnsw',
-      m: 16,
-      ef_construction: 100,
+      type: 'hnsw',
+      m: 24,
+      ef_construction: 128,
     },
   },
 };

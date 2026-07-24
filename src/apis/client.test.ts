@@ -739,16 +739,16 @@ function getLib() { return new ClientLibrary(); }
     // ─────────────────────────────────────────────────────────────────────────────
 
     const ENTITY_INDEX_MAP: { name: string; defaultIndex: string }[] = [
-      { name: 'Persona',                  defaultIndex: 'sample-prompt-persona' },
-      { name: 'Template',                 defaultIndex: 'sample-prompt-template' },
-      { name: 'ChatSession',              defaultIndex: 'sample-prompt-session' },
-      { name: 'Scenario',                 defaultIndex: 'sample-prompt-scenario' },
-      { name: 'DevilsAdvocateResult',     defaultIndex: 'sample-prompt-devils' },
-      { name: 'AnalogyBuilderResult',     defaultIndex: 'sample-prompt-analogy' },
-      { name: 'PersonaDebateResult',      defaultIndex: 'sample-prompt-debate' },
-      { name: 'ContentRepurposerResult',  defaultIndex: 'sample-prompt-repurpose' },
-      { name: 'StructureArchitectResult', defaultIndex: 'sample-prompt-outline' },
-      { name: 'GeneratorList',            defaultIndex: 'sample-prompt-generator-list' },
+      { name: 'Persona',                  defaultIndex: 'prompt-hub-persona' },
+      { name: 'Template',                 defaultIndex: 'prompt-hub-template' },
+      { name: 'ChatSession',              defaultIndex: 'prompt-hub-session' },
+      { name: 'Scenario',                 defaultIndex: 'prompt-hub-scenario' },
+      { name: 'DevilsAdvocateResult',     defaultIndex: 'prompt-hub-devils' },
+      { name: 'AnalogyBuilderResult',     defaultIndex: 'prompt-hub-analogy' },
+      { name: 'PersonaDebateResult',      defaultIndex: 'prompt-hub-debate' },
+      { name: 'ContentRepurposerResult',  defaultIndex: 'prompt-hub-repurpose' },
+      { name: 'StructureArchitectResult', defaultIndex: 'prompt-hub-outline' },
+      { name: 'GeneratorList',            defaultIndex: 'prompt-hub-generator-list' },
     ];
 
     // ── C1 Endpoint Resolution ────────────────────────────────────────────────────
