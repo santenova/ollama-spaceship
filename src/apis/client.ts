@@ -657,7 +657,7 @@ export function createClient(config: {
           thinkingEnabled: async (prompt: string, signal?: AbortSignal) => {
             return thinkingEnabled(prompt, {
               ollamaEndpoints: resolvedOllamaEndpoints,
-              model: modelRouter.resolve('thinking', prompt, resolvedModel),
+              model: modelRouter.resolve('chat', prompt, resolvedModel),
             });
           },
           thinkingLevels: async (prompt: string, signal?: AbortSignal) => {

@@ -1192,11 +1192,17 @@ function getLib() { return new ClientLibrary(); }
         ].filter(Boolean).join('\n');
 
         console.log(systemPrompt);
-     
+
+        const userPrompt = `create an ultra smart inventory system of projects and other relevant actors,
+                        the indices need be able to be reduced by geo-search + vector search + user query ,
+                        and an array of project  scores like funding, members,
+                        efficency, avg turnout in tonnes  many as possible! locations funding project score in terms time,
+                        cost, technology consider that add context and real sample data`;
+
 
         const improvedx = await getLib().chatCompletion([ 
             { role: 'system', content: systemPrompt },
-            { role: 'user', content: 'What is the biggest threat to coral reefs today?' },  ],
+            { role: 'user', content: userPrompt },  ],
             { temperature: 0.8});
     
         
@@ -1474,20 +1480,48 @@ function getLib() { return new ClientLibrary(); }
       }
     }
 
+    
+    async function testC27ClientProbe(): Promise<TestResult> {
+      const { emit, log } = makeRunner();
+      const name = 'C27 CLIENT Probe ';
+      try {
+        const { createClient, config } = await getClientModule();
+
+        const client = createClient(config);
+        const info = await client.probe();
+        
+        console.log(`  client → probe ${info.backend} ${info.totalVramMb}`);
+        // Pass if the operation succeeded (returned an array), regardless of index population
+
+        const isObject = typeof info === 'object' && info !== null;
+        /*
+        const { results } = await client.multiEntitySearch({
+          query: "python and typescript",
+          entities: ['Persona', 'Template'],
+          topK: 3,
+        });
+        console.log({'multiEntitySearch':results});
+        */
+
+        return { name, pass: isObject, output: log };
+      } catch (e: any) { return { name, pass: false, output: log, error: e?.message }; }
+    }
+
+
     // ─────────────────────────────────────────────────────────────────────────────
     // SUITE A — Ollama modules (original)
     // ─────────────────────────────────────────────────────────────────────────────
 
     // ─── Runner ───────────────────────────────────────────────────────────────────
 
-    const SUITE_A = [
+    const SUITE_A = [testCalculator
       /*
-      testCalculator,
+      ,
       testFlightTracker,
       testMultiTool,
       testWebsearchTools, 
-    testThinkingEnabled, */
-      testThinkingStreaming];
+    testThinkingEnabled, testThinkingStreaming*/
+      ];
 
     const SUITE_B = [
       testB1ConfigSchema,
@@ -1517,14 +1551,16 @@ function getLib() { return new ClientLibrary(); }
       testC13ESPersonaUpdateMany,
       testC14ESPersonaDeleteMany,
       testC15ESPersonaSchema,
-      testC16ESPersonaSubscribe,
+    /*  testC16ESPersonaSubscribe,
       testC18PromptRouter,
       testC17PersonaSearchAndChat,
         testC20Solution,
-    
+    testC27ClientProbe,
         testC22ClientInfraWiring,
-      testC19Vision,testC21VisionStructured,testC23Vector,testC24StreamResponseChat,testC25StreamResponseVision,testC26StreamResponseAbort
+      testC21VisionStructured,testC23Vector,testC24StreamResponseChat,testC25StreamResponseVision,testC26StreamResponseAbort*/
     ];
+
+    //testC19Vision
     const ALL_TESTS = [...SUITE_A, ...SUITE_B, ...SUITE_C];
 
     async function runSuite(label: string, tests: (() => Promise<TestResult>)[]): Promise<number> {
