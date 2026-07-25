@@ -17,7 +17,7 @@ import {
 } from '../client.test';
 
 // Increase timeout for real network calls (30 s per test, 120 s for suite C)
-jest.setTimeout(120_000);
+jest.setTimeout(240_000);
 
 // ── Shared failure collector — aggregated across all suites ──────────────────
 const failures: { suite: string; name: string; error?: string }[] = [];

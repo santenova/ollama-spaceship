@@ -36,6 +36,8 @@ import { createProgressTracker, type AugmentedChunk, type StreamSummary } from "
 import { LocationService } from "../apis/lib/location";
 import { hookTelemetry, patchLogger } from "../apis/lib/telemetryLogStore";
 
+
+
 interface ToolSchema {
   type: string;
   function: {
@@ -1374,9 +1376,33 @@ export const client = createclientWithFallback(baseClient);
 // (TelemetryInfoDialog) can observe all events and log lines in real time.
 patchLogger(clientLogger);
 hookTelemetry(telemetry);
-
+export { ClientLibrary } from './ClientLibrary';
 // Direct access to ES-backed entities and config helpers
-export { esEntities, getEsConfig, saveEsConfig, createEsEntities, getIndexPrefix, setIndexPrefix };
+export { esEntities, getEsConfig, saveEsConfig, createEsEntities, getIndexPrefix, setIndexPrefix};
+
+export { thinkingLevels };
+export { createCircuitBreaker };
+export { telemetry };
+export { toolRegistry };
+export { modelRouter };
+export { promptRouter };
+export { createBatcher };
+export { createAuthMiddleware };
+export { trackedOllamaFetch };
+export { abortManager };
+export { webSearch };
+export { multiToolRun };
+export { flightTracker };
+export { calculator };
+export { vectorPipeline };
+export { safeExecute };
+export { TelemetryEvents };
+export { endpointRegistry };
+export { createRateLimiter, type RateLimiter };
+export { createProgressTracker, type AugmentedChunk, type StreamSummary };
+export { LocationService };
+export { hookTelemetry, patchLogger };
+
 
 // ─── OpenAI-compatible chat methods (frontend-facing) ────────────────────────
 // These methods use client.config (localStorage-backed) for defaults;

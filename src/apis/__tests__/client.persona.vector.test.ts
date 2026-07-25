@@ -290,8 +290,8 @@ describe('Persona vector index pipeline', () => {
     const hits = await knnSearch(vectorIndex, queryVec!, 5);
     expect(hits.length).toBeGreaterThan(0);
 
-    const top = hits[0];
-    console.log('[expertise closest]', top._source?.name, 'score:', top._score);
+    const top = hits[1];
+    console.log(marineBiologist.name+': [expertise closest]', top._source?.name, 'score:', top._score);
     expect(top._score).toBeGreaterThan(0);
 
     // The top result should share at least one marine/ocean/bio keyword
@@ -303,7 +303,7 @@ describe('Persona vector index pipeline', () => {
       marineKeywords.some((k) => topName.includes(k)) ||
       topExpertise.some((e) => marineKeywords.some((k) => e.includes(k))) ||
       topTags.some((t) => marineKeywords.some((k) => t.includes(k)));
-    console.log('[expertise closest] related:', isRelated, '| name:', top._source?.name);
+    console.log(marineBiologist.name+': [expertise closest] related:', isRelated, '| name:', top._source?.name);
     // Soft assertion — log rather than fail if corpus is small
     if (hits.length > 1) {
       expect(top._score).toBeGreaterThanOrEqual(hits[hits.length - 1]._score);
@@ -318,10 +318,10 @@ describe('Persona vector index pipeline', () => {
     expect(hits.length).toBeGreaterThan(0);
 
     const farthest = hits[hits.length - 1];
-    console.log('[expertise farthest]', farthest._source?.name, 'score:', farthest._score);
+    console.log(marineBiologist.name+': [expertise farthest]', farthest._source?.name, 'score:', farthest._score);
     expect(farthest._score).toBeGreaterThan(0);
     if (hits.length > 1) {
-      expect(farthest._score).toBeLessThanOrEqual(hits[0]._score);
+      expect(farthest._score).toBeLessThanOrEqual(hits[1]._score);
     }
   });
 
@@ -335,8 +335,8 @@ describe('Persona vector index pipeline', () => {
     const hits = await knnSearch(vectorIndex, queryVec!, 5);
     expect(hits.length).toBeGreaterThan(0);
 
-    const top = hits[0];
-    console.log('[tags closest]', top._source?.name, 'score:', top._score);
+    const top = hits[1];
+    console.log(marineBiologist.name+': [tags closest]', top._source?.name, 'score:', top._score);
     expect(top._score).toBeGreaterThan(0);
     if (hits.length > 1) {
       expect(top._score).toBeGreaterThanOrEqual(hits[hits.length - 1]._score);
@@ -351,9 +351,9 @@ describe('Persona vector index pipeline', () => {
     expect(hits.length).toBeGreaterThan(0);
 
     const farthest = hits[hits.length - 1];
-    console.log('[tags farthest]', farthest._source?.name, 'score:', farthest._score);
+    console.log(marineBiologist.name+': [tags farthest]', farthest._source?.name, 'score:', farthest._score);
     if (hits.length > 1) {
-      expect(farthest._score).toBeLessThanOrEqual(hits[0]._score);
+      expect(farthest._score).toBeLessThanOrEqual(hits[1]._score);
     }
   });
 
@@ -371,8 +371,8 @@ describe('Persona vector index pipeline', () => {
     const hits = await knnSearch(vectorIndex, queryVec!, 5);
     expect(hits.length).toBeGreaterThan(0);
 
-    const top = hits[0];
-    console.log('[vocab closest]', top._source?.name, 'score:', top._score);
+    const top = hits[1];
+    console.log(marineBiologist.name+': [vocab closest]', top._source?.name, 'score:', top._score);
     expect(top._score).toBeGreaterThan(0);
     if (hits.length > 1) {
       expect(top._score).toBeGreaterThanOrEqual(hits[hits.length - 1]._score);
@@ -389,9 +389,9 @@ describe('Persona vector index pipeline', () => {
     expect(hits.length).toBeGreaterThan(0);
 
     const farthest = hits[hits.length - 1];
-    console.log('[vocab farthest]', farthest._source?.name, 'score:', farthest._score);
+    console.log(marineBiologist.name+': [vocab farthest]', farthest._source?.name, 'score:', farthest._score);
     if (hits.length > 1) {
-      expect(farthest._score).toBeLessThanOrEqual(hits[0]._score);
+      expect(farthest._score).toBeLessThanOrEqual(hits[1]._score);
     }
   });
 

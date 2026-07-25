@@ -901,6 +901,3 @@ export class ClientLibrary {
     return tripleValidation(cfg.ollamaEndpoints, cfg.model, opts);
   }
 }
-
-/** Singleton instance — import and use directly without instantiating. */
-export const clientLibrary = new ClientLibrary();

@@ -1,8 +1,8 @@
 
 // import { config, client, createClient, modelRouter , TelemetryEvents, telemetry } from '@santex/ollama-spaceship-sdk';
 
-import { ClientLibrary, clientLibrary } from './apis/ClientLibrary';
-import { config ,client} from './apis/client';
+import { ClientLibrary } from './apis/ClientLibrary.js';
+import { config ,client, createClient } from './apis/client.js';
 
 function getLib() { return new ClientLibrary(); }
 
@@ -10,7 +10,7 @@ function getLib() { return new ClientLibrary(); }
 
 
 
-async function main() {
+export async function test() {
   try {
     // access a client
     console.log('Creating a new client instance');
@@ -50,7 +50,7 @@ async function main() {
 
     console.log({'enhanced prompt':enhanced});
 
-    const stream = clientLibrary.stream('chat',enhanced);
+    const stream = lib.stream('chat',enhanced);
     stream.subscribe({
       next(chunk) { console.log(chunk); },
       error(err)  { console.error(err); },
@@ -89,6 +89,7 @@ async function main() {
   }
 }
 
-main();
+export * from './apis/ClientLibrary.js';
+export * from './apis/client.js';
 
-
+// test();

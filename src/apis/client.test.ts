@@ -1,5 +1,5 @@
 
-import { ClientLibrary, clientLibrary } from './ClientLibrary';
+import { ClientLibrary } from './ClientLibrary';
 import { config ,client} from './client';
 
 function getLib() { return new ClientLibrary(); }
@@ -1203,14 +1203,9 @@ function getLib() { return new ClientLibrary(); }
         const replyText = typeof improvedx === 'string' ? improvedx : JSON.stringify(improvedx);
         console.log(replyText);
 
-        const question = await clientLibrary.chatCompletion(
-      [
-        { role: 'user', content: `create a random intersting question use any domain you want` },
-      ],
-      { temperature: 0.5 }
-    );
-    console.log(question);
-    const improved = await clientLibrary.chatCompletion(
+        const question =replyText;
+
+    const improved = await getLib().chatCompletion(
       [
         { role: 'system', content: 'You are a response quality expert. Critique the original response for accuracy, clarity, and completeness, then provide a significantly improved version. Output ONLY the improved response, no meta-commentary or preamble.' },
         { role: 'user', content: `improve user message: ${question} add relevant context\n` },
@@ -1219,7 +1214,7 @@ function getLib() { return new ClientLibrary(); }
     );
 
     console.log(improved);
-    const results = await clientLibrary.autoSelectPersona(improved, 1);
+    const results = await getLib().autoSelectPersona(improved, 1);
         if (Array.isArray(results)) {
               for (const r of results) {
 
@@ -1227,7 +1222,7 @@ function getLib() { return new ClientLibrary(); }
             { role: 'system', content: r.instructions},
             { role: 'user', content: question },
           ]
-           const response = await clientLibrary.chatCompletion(
+           const response = await getLib().chatCompletion(
           messages,
           { temperature: 0.5 }
         );
@@ -1264,12 +1259,12 @@ function getLib() { return new ClientLibrary(); }
 
         
             
-            const results = await clientLibrary.autoSelectPersona(category.toLowerCase(), 1);
+            const results = await getLib().autoSelectPersona(category.toLowerCase(), 1);
             // null = PersonaVector unavailable or no match; array = matches found
             
             if (Array.isArray(results)) {
               for (const r of results) {
-                   const improved = await clientLibrary.chatCompletion(
+                   const improved = await getLib().chatCompletion(
       [
         { role: 'system', content: 'You are a response quality expert. Critique the original response for accuracy, clarity, and completeness, then provide a significantly improved version. Output ONLY the improved response, no meta-commentary or preamble.' },
         { role: 'user', content: `improve user message: ${domains[xc][i]} add relevant context\n` },
@@ -1280,7 +1275,7 @@ function getLib() { return new ClientLibrary(); }
                     { role: 'system', content: r.instructions},
                     { role: 'user', content: domains[xc][i] },
                   ]
-                   const response = await clientLibrary.chatCompletion(
+                   const response = await getLib().chatCompletion(
                   messages,
                   { temperature: 0.5 }
                 );
@@ -1525,11 +1520,10 @@ function getLib() { return new ClientLibrary(); }
       testC16ESPersonaSubscribe,
       testC18PromptRouter,
       testC17PersonaSearchAndChat,
-   /*     testC20Solution,
+        testC20Solution,
     
         testC22ClientInfraWiring,
       testC19Vision,testC21VisionStructured,testC23Vector,testC24StreamResponseChat,testC25StreamResponseVision,testC26StreamResponseAbort
-      */        
     ];
     const ALL_TESTS = [...SUITE_A, ...SUITE_B, ...SUITE_C];
 
