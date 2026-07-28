@@ -375,6 +375,24 @@ export async function tripleValidation(
       durationMs,
       ...(opts.includePerCase ? { perCase } : {}),
     });
+    /*
+    console.log(Object.entries({
+      model,
+      endpoint: (ollamaEndpoints.find((e) => !!e) || '').replace(/\/$/, ''),
+      correct,
+      wrong,
+      falsePositives: fp,
+      falseNegatives: fn,
+      errors,
+      total,
+      accuracy: total ? correct / total : 0,
+      promptTokens,
+      completionTokens,
+      totalTokens,
+      durationMs,
+      ...(opts.includePerCase ? { perCase } : {}),
+    }).join(", "));
+    */
     modelStartTimes[model] = modelStart;
   }
 

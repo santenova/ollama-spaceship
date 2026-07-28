@@ -128,7 +128,7 @@ All library modules are wired here; app code should prefer **ClientLibrary** or 
 ### Factory
 
 ```ts
-import { createClient } from '@/apis/client';
+import { createClient } from '@santex/ollama-spaceship-sdk';
 
 const myClient = createClient({
   serverUrl: 'https://es.example.com',   // Elasticsearch endpoint
@@ -245,7 +245,7 @@ Class wrapper around the `client` singleton. Recommended for all app code.
 Import the singleton: `import { clientLibrary } from '@/apis/ClientLibrary'`.
 
 ```ts
-import { clientLibrary as lib } from '@/apis/ClientLibrary';
+import { clientLibrary as lib } from '@santex/ollama-spaceship-sdk';
 
 // LLM
 const text = await lib.invoke({ prompt: 'Hello' });
@@ -365,7 +365,7 @@ saveEsConfig({ ...cfg, endpoint: 'https://my-es.example.com' });
 ### Entity CRUD
 
 ```ts
-import { esEntities } from '@/apis/client';
+import { esEntities } from '@santex/ollama-spaceship-sdk';
 
 // All methods return plain objects with { id, ...fields }
 await esEntities.Persona.list('-created_date', 50);
@@ -458,7 +458,7 @@ createRateLimiter('no-limit', { maxCalls: 0 });
 Global registry of named `AbortController` instances for request cancellation.
 
 ```ts
-import { abortManager } from '@/apis/client';
+import { abortManager } from '@santex/ollama-spaceship-sdk';
 
 const ctrl = abortManager.create('my-key');    // creates & registers
 const sig  = abortManager.signal('my-key');    // get signal for any fetch
@@ -497,7 +497,7 @@ const res = await auth.withAuth('https://api.example.com/data', { method: 'GET' 
 Structured logger with timing support and Ollama communication summaries.
 
 ```ts
-import { clientLogger } from '@/apis/client';
+import { clientLogger } from '@santex/ollama-spaceship-sdk';
 
 clientLogger.info('operation started', { model: 'qwen3' });
 clientLogger.warn('retrying', { attempt: 2 });
@@ -518,7 +518,7 @@ Calls to known Ollama operations (InvokeLLM, vector, vision, etc.) automatically
 Lightweight event emitter for client lifecycle events. React components can subscribe to monitor performance without coupling to Ollama internals.
 
 ```ts
-import { telemetry } from '@/apis/client';
+import { telemetry } from '@santex/ollama-spaceship-sdk';
 
 // Subscribe
 const unsubscribe = telemetry.on('client:request-start', ({ tool, timestamp }) => {
@@ -572,7 +572,7 @@ The full catalogue lives in [`lib/telemetry-events.ts`](#23-libtelemetry-eventst
 Dynamic plugin map for named async tools.
 
 ```ts
-import { toolRegistry } from '@/apis/client';
+import { toolRegistry } from '@santex/ollama-spaceship-sdk';
 
 // Register
 toolRegistry.register('myTool', async (params) => {
@@ -608,7 +608,7 @@ caches in memory → localStorage → Elasticsearch (shared across all clients).
 ### Resolve API
 
 ```ts
-import { modelRouter } from '@/apis/client';
+import { modelRouter } from '@santex/ollama-spaceship-sdk';
 
 // Positional (speed=100 = fastest model)
 const model = modelRouter.resolve('chat', 'my prompt', 'fallback-model');
@@ -657,7 +657,7 @@ Enhances raw user prompts using the LLM (via modelRouter for model selection).
 Never throws — falls back to the raw prompt on any error.
 
 ```ts
-import { promptRouter } from '@/apis/client';
+import { promptRouter } from '@santex/ollama-spaceship-sdk';
 
 const enhanced = await promptRouter.enhance('write about ocean', {
   TaskType: 'chat',
@@ -941,7 +941,7 @@ Single source of truth for every telemetry event name. The `TelemetryEvents` obj
 
 ```ts
 import { TelemetryEvents } from '@/apis/lib/telemetry-events';
-import { telemetry } from '@/apis/client';
+import { telemetry } from '@santex/ollama-spaceship-sdk';
 
 // Always reference the constant — never a raw string literal.
 telemetry.emit(TelemetryEvents.ABTEST_START, { variantCount: 2, metrics: ['clarity'] });
@@ -1328,7 +1328,7 @@ await gptOssBrowserTools();
 
 ```ts
 // Recommended — use the singleton class wrapper
-import { clientLibrary as lib } from '@/apis/ClientLibrary';
+import { clientLibrary as lib } from '@santex/ollama-spaceship-sdk';
 
 // Simple LLM call
 const answer = await lib.invoke({ prompt: 'What is the speed of light?' });
