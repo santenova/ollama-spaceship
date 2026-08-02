@@ -365,21 +365,20 @@ saveEsConfig({ ...cfg, endpoint: 'https://my-es.example.com' });
 ### Entity CRUD
 
 ```ts
-import { esEntities } from '@santex/ollama-spaceship-sdk';
 
+const lib = new ClientLibrary();
 // All methods return plain objects with { id, ...fields }
-await esEntities.Persona.list('-created_date', 50);
-await esEntities.Persona.filter({ status: 'active' }, '-updated_date', 20);
-await esEntities.Persona.get('id-123');
-await esEntities.Persona.create({ name: 'Expert', description: '...' });
-await esEntities.Persona.update('id-123', { name: 'Updated' });
-await esEntities.Persona.delete('id-123');
-await esEntities.Persona.deleteMany({ status: 'archived' });
-await esEntities.Persona.bulkCreate([{ name: 'A' }, { name: 'B' }]);
-await esEntities.Persona.bulkUpdate([{ id: 'x', name: 'X' }, { id: 'y', name: 'Y' }]);
-await esEntities.Persona.updateMany({ status: 'draft' }, { $set: { status: 'published' } });
-await esEntities.Persona.schema();    // → JSON schema from ES mapping
-esEntities.Persona.subscribe(event => console.log(event)); // polling diff, 5s interval
+await lib.entities.Persona.list('-created_date', 50);
+await lib.entities.Persona.filter({ status: 'active' }, '-updated_date', 20);
+
+const p = await lib.entities.Persona.create({ name: 'Expert', description: '...' });
+await lib.entities.Persona.update(p.id, { name: 'Updated' });
+await lib.entities.Persona.delete(p.id);
+await lib.entities.Persona.deleteMany({ status: 'archived' });
+await lib.entities.Persona.bulkCreate([{ name: 'A' }, { name: 'B' }]);
+await lib.entities.Persona.bulkUpdate([{ id: 'x', name: 'X' }, { id: 'y', name: 'Y' }]);
+await lib.entities.Persona.updateMany({ status: 'draft' }, { $set: { status: 'published' } });
+await lib.entities.Persona.schema();    // → JSON schema from ES mapping
 ```
 
 ### Query operators (MongoDB-style → ES translation)
